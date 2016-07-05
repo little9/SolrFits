@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="fits">
+    <CLASSES>
+      <root url="file://$USER_HOME$/Downloads/fits-1.0.0/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/Downloads/fits-1.0.0/lib" recursive="false" />
+  </library>
+</component>
