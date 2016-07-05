@@ -1,4 +1,4 @@
-package org.jamielittle;
+package org.solrfits;
 
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.exceptions.FitsException;
@@ -30,13 +30,14 @@ public class FitsVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file,
                                      BasicFileAttributes attr) throws UnknownHostException {
 
-        if (attr.isRegularFile()) {
+        if (attr.isRegularFile() && file.getFileName().toString().indexOf(".mtf") < 0 && file.getFileName().toString().indexOf("checksum_manifest") < 0) {
+
 
             FitsExaminer fj = new FitsExaminer(fits,sc);
 
             try {
                 try {
-                    System.out.println(fj.examineFile(file.toFile()));
+                    fj.examineFile(file.toFile());
                 } catch (SolrServerException e) {
                     e.printStackTrace();
                 } catch (XMLStreamException e) {

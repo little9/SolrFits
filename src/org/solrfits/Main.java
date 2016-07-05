@@ -1,4 +1,4 @@
-package org.jamielittle;
+package org.solrfits;
 
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.exceptions.FitsConfigurationException;
@@ -22,7 +22,6 @@ public class Main {
             SolrClient solr = new HttpSolrClient.Builder(urlString).build();
 
             FitsVisitor fv = new FitsVisitor(fits,solr);
-
             Path startingDir = Paths.get(args[2]);
 
             walkFileTree(startingDir, fv);

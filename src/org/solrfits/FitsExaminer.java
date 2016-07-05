@@ -1,4 +1,4 @@
-package org.jamielittle;
+package org.solrfits;
 
 import edu.harvard.hul.ois.fits.Fits;
 import edu.harvard.hul.ois.fits.FitsMetadataElement;
@@ -18,8 +18,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.net.UnknownHostException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -59,7 +57,6 @@ public class FitsExaminer {
 
     public void indexFitsIdentities(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsIdentity fitsIdentity : fitsOutput.getIdentities()) {
-            //  solrDoc.addField("mime_type", fitsIdentity.getMimetype());
             solrDoc.addField("format", fitsIdentity.getFormat());
         }
     }
@@ -74,7 +71,8 @@ public class FitsExaminer {
         }
     }
 
-    public String examineFile(File file) throws FitsException, IOException, SolrServerException, XMLStreamException {
+    public void examineFile(File file) throws FitsException, IOException, SolrServerException, XMLStreamException {
+
 
         FitsOutput fitsOutput = fits.examine(file);
 
@@ -100,6 +98,5 @@ public class FitsExaminer {
             e.printStackTrace();
         }
 
-        return "";
     }
 }

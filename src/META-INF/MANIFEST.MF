@@ -10,5 +10,5 @@ Class-Path: jdom.jar AES31.jar hclaps.jar saxon9.jar saxpath.jar fast-
  r httpcore-4.4.1.jar httpmime-4.4.1.jar zookeeper-3.4.6.jar stax2-api
  -3.1.4.jar woodstox-core-asl-4.4.1.jar noggit-0.6.jar jcl-over-slf4j-
  1.7.7.jar slf4j-api-1.7.7.jar
-Main-Class: org.jamielittle.Main
+Main-Class: org.solrfits.Main
 
