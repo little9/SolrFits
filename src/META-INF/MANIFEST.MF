@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Class-Path: jdom.jar AES31.jar hclaps.jar saxon9.jar saxpath.jar fast-
+ md5.jar jna-4.1.0.jar fits-1.0.0.jar jaxen-core.jar jaxen-jdom.jar ot
+ s_1.0.36.jar saxon9-dom.jar serializer.jar saxon9-jdom.jar log4j-1.2.
+ 17.jar commons-io-2.4.jar staxmate-2.0.0.jar commons-cli-1.1.jar stax
+ 2-api-3.0.1.jar commons-lang-2.6.jar slf4j-api-1.7.12.jar xercesImpl-
+ 2.9.1.jar commons-logging-1.2.jar slf4j-log4j12-1.7.12.jar woodstox-c
+ ore-lgpl-4.0.7.jar commons-collections-3.2.1.jar commons-configuratio
+ n-1.8.jar solr-solrj-6.1.0.jar commons-io-2.5.jar httpclient-4.4.1.ja
+ r httpcore-4.4.1.jar httpmime-4.4.1.jar zookeeper-3.4.6.jar stax2-api
+ -3.1.4.jar woodstox-core-asl-4.4.1.jar noggit-0.6.jar jcl-over-slf4j-
+ 1.7.7.jar slf4j-api-1.7.7.jar
+Main-Class: org.jamielittle.Main
+
