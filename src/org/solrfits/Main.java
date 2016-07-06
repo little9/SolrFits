@@ -7,12 +7,13 @@ import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.NoSuchAlgorithmException;
 
 import static java.nio.file.Files.walkFileTree;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException, FitsConfigurationException {
+    public static void main(String[] args) throws IOException, FitsConfigurationException, NoSuchAlgorithmException {
 
         if (args.length < 2) {
             System.out.println("You need to add the path to the FITS directory, the URI of your Solr server, and the path to the directory to index.");

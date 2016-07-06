@@ -33,6 +33,8 @@ class FitsExaminer {
 
     private Fits fits;
     private SolrClient solr;
+    private Set<String> elementSet;
+
 
     private void setSolr(SolrClient solr) {
         this.solr = solr;
@@ -41,6 +43,7 @@ class FitsExaminer {
     FitsExaminer(Fits myFits, SolrClient sc) throws UnknownHostException {
         setFits(myFits);
         setSolr(sc);
+        this.elementSet = new HashSet<String>();
     }
 
 
@@ -52,13 +55,7 @@ class FitsExaminer {
     private void indexFitsFileInfo(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsMetadataElement metadataElement : fitsOutput.getFileInfoElements()) {
 
-
-
-                solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
-
-
-            System.out.println(metadataElement.getName() + " : " + metadataElement.getValue());
-
+            solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
         }
     }
 
@@ -72,19 +69,18 @@ class FitsExaminer {
         try {
             for (FitsMetadataElement el : fitsOutput.getTechMetadataElements()) {
                 System.out.println(el.getName() + ":" + el.getValue());
+
+                //this.elementSet.add("<field name=\"" + el.getName() + "\" type=\"string\" indexed=\"true\" stored=\"true\" />");
                 solrDoc.addField(el.getName(), el.getValue());
+
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
     }
 
     void examineFile(File file) throws FitsException, IOException, SolrServerException, XMLStreamException {
-
-
+        System.out.println("Adding " + file.getName());
         FitsOutput fitsOutput = fits.examine(file);
-
-
         fitsOutput.addStandardCombinedFormat();
 
         SolrInputDocument solrDoc = new SolrInputDocument();
@@ -97,8 +93,19 @@ class FitsExaminer {
         this.indexFitsXml(fitsXml, solrDoc);
 
         try {
+            UpdateResponse response = solr.add(solrDoc);
             solr.commit();
+
         } catch (HttpSolrClient.RemoteSolrException e) {
+
+            /*
+            if (this.elementSet != null) {
+                for (String s : this.elementSet) {
+                    System.out.println(s);
+                }
+            }
+            */
+
             e.printStackTrace();
         }
 
