@@ -17,11 +17,11 @@ import static java.nio.file.FileVisitResult.*;
 /**
  * Created by jamie on 7/3/16.
  */
-public class FitsVisitor extends SimpleFileVisitor<Path> {
+class FitsVisitor extends SimpleFileVisitor<Path> {
     private final Fits fits;
     private final SolrClient sc;
 
-    public FitsVisitor(Fits myFits, SolrClient mySc) {
+    FitsVisitor(Fits myFits, SolrClient mySc) {
         fits = myFits;
         sc = mySc;
     }
@@ -30,7 +30,7 @@ public class FitsVisitor extends SimpleFileVisitor<Path> {
     public FileVisitResult visitFile(Path file,
                                      BasicFileAttributes attr) throws UnknownHostException {
 
-        if (attr.isRegularFile() && file.getFileName().toString().indexOf(".mtf") < 0 && file.getFileName().toString().indexOf("checksum_manifest") < 0) {
+        if (attr.isRegularFile() && !file.getFileName().toString().contains(".mtf") && !file.getFileName().toString().contains("checksum_manifest")) {
 
 
             FitsExaminer fj = new FitsExaminer(fits,sc);
@@ -38,18 +38,13 @@ public class FitsVisitor extends SimpleFileVisitor<Path> {
             try {
                 try {
                     fj.examineFile(file.toFile());
-                } catch (SolrServerException e) {
-                    e.printStackTrace();
-                } catch (XMLStreamException e) {
+                } catch (SolrServerException | XMLStreamException e) {
                     e.printStackTrace();
                 }
-            } catch (FitsException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (FitsException | IOException e) {
                 e.printStackTrace();
             }
-
-        };
+        }
         return CONTINUE;
     }
 

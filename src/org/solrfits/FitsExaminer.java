@@ -10,6 +10,7 @@ import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.common.SolrInputField;
 import org.jdom.Document;
 import org.jdom.output.XMLOutputter;
 
@@ -24,46 +25,53 @@ import java.util.*;
 /**
  * Created by jamie on 7/3/16.
  */
-public class FitsExaminer {
+class FitsExaminer {
 
-    public void setFits(Fits fits) {
+    private void setFits(Fits fits) {
         this.fits = fits;
     }
 
     private Fits fits;
     private SolrClient solr;
 
-    public void setSolr(SolrClient solr) {
+    private void setSolr(SolrClient solr) {
         this.solr = solr;
     }
 
-    public FitsExaminer(Fits myFits, SolrClient sc) throws UnknownHostException {
+    FitsExaminer(Fits myFits, SolrClient sc) throws UnknownHostException {
         setFits(myFits);
         setSolr(sc);
     }
 
 
-    public void indexFitsXml(Document fitsXml, SolrInputDocument solrDoc) {
+    private void indexFitsXml(Document fitsXml, SolrInputDocument solrDoc) {
         /* Add the full FITS XML content to the index */
         solrDoc.addField("fits_xml", new XMLOutputter().outputString(fitsXml));
     }
 
-    public void indexFitsFileInfo(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
+    private void indexFitsFileInfo(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsMetadataElement metadataElement : fitsOutput.getFileInfoElements()) {
+
+
+
+                solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
+
+
             System.out.println(metadataElement.getName() + " : " + metadataElement.getValue());
-            solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
+
         }
     }
 
-    public void indexFitsIdentities(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
+    private void indexFitsIdentities(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsIdentity fitsIdentity : fitsOutput.getIdentities()) {
             solrDoc.addField("format", fitsIdentity.getFormat());
         }
     }
 
-    public void indexTechMetadata(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
+    private void indexTechMetadata(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         try {
             for (FitsMetadataElement el : fitsOutput.getTechMetadataElements()) {
+                System.out.println(el.getName() + ":" + el.getValue());
                 solrDoc.addField(el.getName(), el.getValue());
             }
         } catch (Exception e) {
@@ -71,7 +79,7 @@ public class FitsExaminer {
         }
     }
 
-    public void examineFile(File file) throws FitsException, IOException, SolrServerException, XMLStreamException {
+    void examineFile(File file) throws FitsException, IOException, SolrServerException, XMLStreamException {
 
 
         FitsOutput fitsOutput = fits.examine(file);
@@ -81,8 +89,6 @@ public class FitsExaminer {
 
         SolrInputDocument solrDoc = new SolrInputDocument();
 
-        solrDoc.addField("id", UUID.randomUUID().toString());
-
         this.indexFitsFileInfo(fitsOutput, solrDoc);
         this.indexFitsIdentities(fitsOutput, solrDoc);
         this.indexTechMetadata(fitsOutput, solrDoc);
@@ -91,9 +97,7 @@ public class FitsExaminer {
         this.indexFitsXml(fitsXml, solrDoc);
 
         try {
-            UpdateResponse response = solr.add(solrDoc);
             solr.commit();
-
         } catch (HttpSolrClient.RemoteSolrException e) {
             e.printStackTrace();
         }
