@@ -26,15 +26,12 @@ import java.util.*;
  * Created by jamie on 7/3/16.
  */
 class FitsExaminer {
-
     private void setFits(Fits fits) {
         this.fits = fits;
     }
 
     private Fits fits;
     private SolrClient solr;
-    private Set<String> elementSet;
-
 
     private void setSolr(SolrClient solr) {
         this.solr = solr;
@@ -43,18 +40,15 @@ class FitsExaminer {
     FitsExaminer(Fits myFits, SolrClient sc) throws UnknownHostException {
         setFits(myFits);
         setSolr(sc);
-        this.elementSet = new HashSet<String>();
     }
 
 
     private void indexFitsXml(Document fitsXml, SolrInputDocument solrDoc) {
-        /* Add the full FITS XML content to the index */
         solrDoc.addField("fits_xml", new XMLOutputter().outputString(fitsXml));
     }
 
     private void indexFitsFileInfo(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsMetadataElement metadataElement : fitsOutput.getFileInfoElements()) {
-
             solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
         }
     }
@@ -68,11 +62,7 @@ class FitsExaminer {
     private void indexTechMetadata(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         try {
             for (FitsMetadataElement el : fitsOutput.getTechMetadataElements()) {
-                System.out.println(el.getName() + ":" + el.getValue());
-
-                //this.elementSet.add("<field name=\"" + el.getName() + "\" type=\"string\" indexed=\"true\" stored=\"true\" />");
                 solrDoc.addField(el.getName(), el.getValue());
-
             }
         } catch (Exception ignored) {
         }
@@ -95,17 +85,7 @@ class FitsExaminer {
         try {
             UpdateResponse response = solr.add(solrDoc);
             solr.commit();
-
         } catch (HttpSolrClient.RemoteSolrException e) {
-
-            /*
-            if (this.elementSet != null) {
-                for (String s : this.elementSet) {
-                    System.out.println(s);
-                }
-            }
-            */
-
             e.printStackTrace();
         }
 

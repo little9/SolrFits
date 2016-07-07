@@ -21,14 +21,10 @@ public class Main {
             Fits fits = new Fits(args[0]);
             String urlString = args[1];
             SolrClient solr = new HttpSolrClient.Builder(urlString).build();
-
             FitsVisitor fv = new FitsVisitor(fits,solr);
             Path startingDir = Paths.get(args[2]);
-
             walkFileTree(startingDir, fv);
         }
-
-
 
     }
 }

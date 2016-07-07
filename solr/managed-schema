@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Solr managed schema - automatically generated - DO NOT EDIT -->
+<schema name="example" version="1.6">
+  <uniqueKey>id</uniqueKey>
+  <fieldType name="_bbox_coord" class="solr.TrieDoubleField" stored="false" useDocValuesAsStored="false" docValues="true" precisionStep="8"/>
+  <fieldType name="alphaOnlySort" class="solr.TextField" omitNorms="true" sortMissingLast="true">
+    <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.PatternReplaceFilterFactory" pattern="([^a-z])" replace="all" replacement=""/>
+    </analyzer>
+  </fieldType>
+
+  <fieldType name="uuid" class="solr.UUIDField" indexed="true" />
+  <fieldType name="bbox" class="solr.BBoxField" geo="true" numberType="_bbox_coord" distanceUnits="kilometers"/>
+  <fieldType name="binary" class="solr.BinaryField"/>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="currency" class="solr.CurrencyField" currencyConfig="currency.xml" defaultCurrency="USD" precisionStep="8"/>
+  <fieldType name="date" class="solr.TrieDateField" positionIncrementGap="0" docValues="true" precisionStep="0"/>
+  <fieldType name="double" class="solr.TrieDoubleField" positionIncrementGap="0" docValues="true" precisionStep="0"/>
+  <fieldType name="float" class="solr.TrieFloatField" positionIncrementGap="0" docValues="true" precisionStep="0"/>
+  <fieldType name="ignored" class="solr.StrField" indexed="false" stored="false" docValues="false" multiValued="true"/>
+  <fieldType name="int" class="solr.TrieIntField" positionIncrementGap="0" docValues="true" precisionStep="0"/>
+  <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
+  <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType" geo="true" maxDistErr="0.001" distErrPct="0.025" distanceUnits="kilometers"/>
+  <fieldType name="long" class="solr.TrieLongField" positionIncrementGap="0" docValues="true" precisionStep="0"/>
+  <fieldType name="lowercase" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.KeywordTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  
+  <fieldType name="point" class="solr.PointType" subFieldSuffix="_d" dimension="2"/>
+  <fieldType name="random" class="solr.RandomSortField" indexed="true"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true" docValues="true"/>
+  <fieldType name="tdate" class="solr.TrieDateField" positionIncrementGap="0" docValues="true" precisionStep="6"/>
+  <fieldType name="tdouble" class="solr.TrieDoubleField" positionIncrementGap="0" docValues="true" precisionStep="8"/>
+  <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.EnglishPossessiveFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.SynonymFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.EnglishPossessiveFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_en_splitting" class="solr.TextField" autoGeneratePhraseQueries="true" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="1" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" catenateAll="0" catenateWords="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.SynonymFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="0" generateNumberParts="1" splitOnCaseChange="1" generateWordParts="1" catenateAll="0" catenateWords="0"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.PorterStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_en_splitting_tight" class="solr.TextField" autoGeneratePhraseQueries="true" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+      <filter class="solr.SynonymFilterFactory" expand="false" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="lang/stopwords_en.txt" ignoreCase="true"/>
+      <filter class="solr.WordDelimiterFilterFactory" catenateNumbers="1" generateNumberParts="0" generateWordParts="0" catenateAll="0" catenateWords="1"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.KeywordMarkerFilterFactory" protected="protwords.txt"/>
+      <filter class="solr.EnglishMinimalStemFilterFactory"/>
+      <filter class="solr.RemoveDuplicatesTokenFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.SynonymFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_general_rev" class="solr.TextField" positionIncrementGap="100">
+    <analyzer type="index">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.ReversedWildcardFilterFactory" maxPosQuestion="2" maxFractionAsterisk="0.33" maxPosAsterisk="3" withOriginal="true"/>
+    </analyzer>
+    <analyzer type="query">
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.SynonymFilterFactory" expand="true" ignoreCase="true" synonyms="synonyms.txt"/>
+      <filter class="solr.StopFilterFactory" words="stopwords.txt" ignoreCase="true"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="text_ws" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+    </analyzer>
+  </fieldType>
+  <fieldType name="tfloat" class="solr.TrieFloatField" positionIncrementGap="0" docValues="true" precisionStep="8"/>
+  <fieldType name="tint" class="solr.TrieIntField" positionIncrementGap="0" docValues="true" precisionStep="8"/>
+  <fieldType name="tlong" class="solr.TrieLongField" positionIncrementGap="0" docValues="true" precisionStep="8"/>
+
+  <!-- Basic details -->
+  <field name="fits_xml" type="string" indexed="true" stored="true" />
+  <field name="filename" type="string" indexed="true" stored="true" />
+  <field name="filepath" type="string" indexed="true" stored="true" />
+  <field name="created" type="string" indexed="true" stored="true" multiValued="true" docValues="false" />
+  <field name="dateCreated" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="dateModified" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="id" type="string" indexed="true" stored="true" required="true"  multiValued="false"/>
+  <field name="md5checksum" type="string" indexed="true" stored="true"/>
+  <field name="mime_type" type="string" multiValued="true" indexed="true" stored="true"/>
+  <field name="size" type="float" indexed="true" stored="true"/>
+  <field name="standard" type="string" indexed="true" stored="true"/>
+  <field name="valid" type="boolean" indexed="true" stored="true"/>
+  <field name="well-formed" type="boolean" indexed="true" stored="true"/>
+  <field name="format" type="string" multiValued="true" indexed="true" stored="true"/>
+  <field name="lastmodified" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
+  <field name="mimetype" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
+  <field name="mimeType" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
+  <field name="location" type="string" indexed="true" stored="true"/>
+ 
+
+  <!-- Images --> 
+  <field name="compressionScheme" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="imageHeight" type="string" indexed="true" stored="true" />
+  <field name="imageWidth" type="string" indexed="true" stored="true" />
+  <field name="colorSpace" type="string" indexed="true" stored="true"  />
+  <field name="referenceBlackWhite" type="string" indexed="true" stored="true"  />
+  <field name="YCbCrSubSampling" type="string" indexed="true" stored="true"  />
+  <field name="YCbCrCoefficients" type="string" indexed="true" stored="true"  />
+  <field name="YCbCrPositioning" type="string" indexed="true" stored="true"  />
+  <field name="tileWidth" type="string" indexed="true" stored="true"  />
+  <field name="tileHeight" type="string" indexed="true" stored="true"  />
+  <field name="qualityLayers" type="string" indexed="true" stored="true"  />
+  <field name="resolutionLevels" type="string" indexed="true" stored="true"  />
+  <field name="scannerManufacturer" type="string" indexed="true" stored="true"  />
+  <field name="scannerModelName" type="string" indexed="true" stored="true"  />
+  <field name="_root_" type="string" docValues="false" indexed="true" stored="false" />
+  <field name="_version_" type="long" indexed="true" stored="false" />
+  <field name="bitsPerSample" type="string" indexed="true" stored="true" />
+  <field name="captureDevice" type="string" indexed="true" stored="true" />
+  <field name="cfaPattern" type="string" multiValued="true" indexed="true" stored="true" />
+  <field name="charset" type="string" indexed="true" stored="true" />
+  <field name="creatingApplicationName" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
+  <field name="digitalCameraManufacturer" type="string" indexed="true" stored="true" />
+  <field name="digitalCameraModelName" type="string" indexed="true" stored="true" />
+  <field name="exifVersion" type="string" multiValued="true" indexed="true" stored="true" />
+  <field name="exposureBiasValue" type="string" multiValued="true" indexed="true" stored="true" />
+  <field name="exposureProgram" type="string" indexed="true" stored="true" />
+  <field name="exposureTime" type="float" multiValued="true" indexed="true" stored="true" />
+  <field name="fNumber" type="string" indexed="true" stored="true" />
+  <field name="flash" type="string" indexed="true" stored="true" />
+  <field name="focalLength" type="string" multiValued="true" indexed="true" stored="true" />
+  <field name="fslastmodified" type="string" indexed="true" stored="true" docValues="false" />
+  <field name="gpsVersionID" type="string" indexed="true" stored="true" />
+  <field name="gpsVersionId" type="string" indexed="true" stored="true" />
+  <field name="isoSpeedRating" type="int" indexed="true" stored="true"/>
+  <field name="lightSource" type="string" indexed="true" stored="true"/>
+  <field name="message" type="text_en" multiValued="true" indexed="true" stored="true"/>
+  <field name="meteringMode" type="string" indexed="true" stored="true"/>
+  <field name="orientation" type="string" indexed="true" stored="true"/>
+  <field name="samplingFrequencyUnit" type="string" indexed="true" stored="true"/>
+  <field name="scanningSoftwareName" type="string" indexed="true" stored="true"/>
+  <field name="sensingMethod" type="string" indexed="true" stored="true"/>
+  <field name="shutterSpeedValue" type="string" indexed="true" stored="true"/>
+  <field name="xSamplingFrequency" type="string" indexed="true" stored="true"/>
+  <field name="ySamplingFrequency" type="float" indexed="true" stored="true"/>
+  <field name="maxApertureValue" type="string" multiValued="true" indexed="true" stored="true"/>
+  <field name="samplesPerPixel" type="string" indexed="true" stored="true"/> 
+  <field name="iccProfileName" type="string" indexed="true" stored="true" />
+  <field name="iccProfileVersion" type="string" indexed="true" stored="true" />
+  <field name="formatProfile" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="track" type="string" indexed="true" stored="true" multiValued="true" />
+
+  <!-- GPS -->
+  <field name="gpsDestBearing" type="string" indexed="true" stored="true" />
+  <field name="gpsAltitudeRef" type="string" indexed="true" stored="true" />
+  <field name="gpsDateStamp" type="string" indexed="true" stored="true" />
+  <field name="apertureValue" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="gpsDestBearingRef" type="string" indexed="true" stored="true" />
+  <field name="gpsLongitudeRef" type="string" indexed="true" stored="true" />
+  <field name="gpsAltitude" type="string" indexed="true" stored="true" />
+  <field name="gpsImgDirectionRef" type="string" indexed="true" stored="true" />
+  <field name="gpsLatitudeRef" type="string" indexed="true" stored="true" />
+  <field name="gpsDOP" type="string" indexed="true" stored="true" />
+  <field name="gpsStatus" type="string" indexed="true" stored="true" />
+  <field name="gpsLongitude" type="string" indexed="true" stored="true" />
+  <field name="gpsTimeStamp" type="string" indexed="true" stored="true" />
+  <field name="gpsLatitude" type="string" indexed="true" stored="true" />
+  <field name="gpsSpeedRef" type="string" indexed="true" stored="true" />
+  <field name="brightnessValue" type="string" indexed="true" stored="true" />
+  <field name="brightnessvalue" type="string" indexed="true" stored="true" />
+  <field name="gpsImgDirection" type="string" indexed="true" stored="true" />
+  <field name="gpsSpeed" type="string" indexed="true" stored="true" />
+  <field name="gpsMapDatum" type="string" indexed="true" stored="true" />
+  <field name="gpsProcessingMethod" type="string" indexed="true" stored="true" />
+  <field name="gpsDifferential" type="string" indexed="true" stored="true" />
+  <field name="gpsSatellites" type="string" indexed="true" stored="true" />
+
+  <!-- Video -->
+  <field name="width" type="int" indexed="true" stored="true" />
+  <field name="height" type="int" indexed="true" stored="true" />
+  <field name="bitRate" type="string" indexed="true" stored="true"  />
+  <field name="bitRateMax" type="string" indexed="true" stored="true"  />
+  <field name="bitRateMode" type="string" indexed="true" stored="true" />
+  <field name="scanningFormat" type="string" indexed="true" stored="true"  />
+  <field name="videoDataEncoding" type="string" indexed="true" stored="true"  />
+  <field name="aspectRatio" type="string" indexed="true" stored="true"  />
+  <field name="chromaSubSampling" type="string" indexed="true" stored="true"  />
+  <field name="colorspace" type="string" indexed="true" stored="true"  />
+  <field name="frameRateMode" type="string" indexed="true" stored="true"  />
+  <field name="byteOrder" type="string" indexed="true" stored="true"  multiValued="true" docValues="false"/>
+  <field name="delay" type="string" indexed="true" stored="true" />
+  <field name="compression" type="string" indexed="true" stored="true"  />
+  <field name="streamSize" type="string" indexed="true" stored="true"  />
+  <field name="broadcastStandard" type="string" indexed="true" stored="true"  />
+  <field name="frameCount" type="string" indexed="true" stored="true"  />
+  <field name="bitDepth" type="string" indexed="true" stored="true"  />
+  <field name="duration" type="string" indexed="true" stored="true" />
+
+  <!-- Audio -->
+  <field name="soundField" type="string" indexed="true" stored="true" />
+  <field name="samplingRate" type="string" indexed="true" stored="true"  />
+  <field name="sampleSize" type="string" indexed="true" stored="true"  />
+  <field name="channels" type="string" indexed="true" stored="true"  />
+  <field name="sampleCount" type="string" indexed="true" stored="true"  />
+
+  <!-- Document -->
+  <field name="characterInfo" type="string" indexed="true" stored="true"  />
+  <field name="markupBasis" type="string" indexed="true" multiValued="true" stored="true" />
+  <field name="markupBasisVersion" type="string" indexed="true" multiValued="true" stored="true" />
+  <field name="markupLanguage" type="string" indexed="true" stored="true" />
+  <field name="title" type="string" indexed="true" stored="true" />
+  <field name="author" type="string" indexed="true" stored="true" />
+  <field name="pageCount" type="string" indexed="true" stored="true" />
+  <field name="hasOutline" type="string" indexed="true" stored="true" />
+  <field name="linebreak" type="string" indexed="true" stored="true" multiValued="true" docValues="false"/>
+  <field name="hasAnnotations" type="string" indexed="true" stored="true" />
+  <field name="font" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="isTagged" type="string" indexed="true" stored="true" />
+  <field name="hasForms" type="string" indexed="true" stored="true" />
+  
+  
+  
+  <dynamicField name="*_coordinate" type="tdouble" indexed="true" stored="false" useDocValuesAsStored="false"/>
+  <dynamicField name="ignored_*" type="ignored" multiValued="true"/>
+  <dynamicField name="random_*" type="random"/>
+  <dynamicField name="attr_*" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_txt" type="text_general" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_dts" type="date" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_tdt" type="tdate" indexed="true" stored="true"/>
+  <dynamicField name="*_is" type="int" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_ss" type="string" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_ls" type="long" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_en" type="text_en" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_bs" type="boolean" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_fs" type="float" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_ds" type="double" multiValued="true" indexed="true" stored="true"/>
+  <dynamicField name="*_dt" type="date" indexed="true" stored="true"/>
+  <dynamicField name="*_ti" type="tint" indexed="true" stored="true"/>
+  <dynamicField name="*_tl" type="tlong" indexed="true" stored="true"/>
+  <dynamicField name="*_tf" type="tfloat" indexed="true" stored="true"/>
+  <dynamicField name="*_td" type="tdouble" indexed="true" stored="true"/>
+  <dynamicField name="*_i" type="int" indexed="true" stored="true"/>
+  <dynamicField name="*_s" type="string" indexed="true" stored="true"/>
+  <dynamicField name="*_l" type="long" indexed="true" stored="true"/>
+  <dynamicField name="*_t" type="text_general" indexed="true" stored="true"/>
+  <dynamicField name="*_b" type="boolean" indexed="true" stored="true"/>
+  <dynamicField name="*_f" type="float" indexed="true" stored="true"/>
+  <dynamicField name="*_d" type="double" indexed="true" stored="true"/>
+  <dynamicField name="*_p" type="location" indexed="true" stored="true"/>
+  <dynamicField name="*_c" type="currency" indexed="true" stored="true"/>
+</schema>
