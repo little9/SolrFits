@@ -147,6 +147,27 @@
   <field name="creatingApplicationName" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
   <field name="creatingApplicationVersion" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
   <!-- Images --> 
+  
+  <field name="extraSamples" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="colorMap" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="grayResponseCurve" type="string" indexed="true" stored="true" />
+  <field name="grayResponseUnit" type="string" indexed="true" stored="true" />
+
+  <field name="whitePointXValue" type="string" indexed="true" stored="true" />
+  <field name="whitePointYValue" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesRedX" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesRedY" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesGreenX" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesGreenY" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesBlueX" type="string" indexed="true" stored="true" />
+  <field name="primaryChromaticitiesBlueY" type="string" indexed="true" stored="true" />
+  
+  <field name="imageProducer" type="string" indexed="true" stored="true" />
+  <field name="scannerModelNumber" type="string" indexed="true" stored="true" />
+  <field name="scannerModelSerialNo" type="string" indexed="true" stored="true" />
+  <field name="scanningSoftwareName" type="string" indexed="true" stored="true" />
+  <field name="scanningSoftwareVersionNo" type="string" indexed="true" stored="true"></field>
+  
   <field name="compressionScheme" type="string" indexed="true" stored="true" multiValued="true" />
   <field name="imageHeight" type="string" indexed="true" stored="true" />
   <field name="imageWidth" type="string" indexed="true" stored="true" />
@@ -184,7 +205,7 @@
   <field name="meteringMode" type="string" indexed="true" stored="true"/>
   <field name="orientation" type="string" indexed="true" stored="true"/>
   <field name="samplingFrequencyUnit" type="string" indexed="true" stored="true"/>
-  <field name="scanningSoftwareName" type="string" indexed="true" stored="true"/>
+  
   <field name="sensingMethod" type="string" indexed="true" stored="true"/>
   <field name="shutterSpeedValue" type="string" indexed="true" stored="true"/>
   <field name="xSamplingFrequency" type="string" indexed="true" stored="true"/>
@@ -255,7 +276,7 @@
   <field name="whiteBalance" type="string" indexed="true" stored="true" />
   <field name="imageStabilization" type="string" indexed="true" stored="true"/>
   <field name="focus" type="string" indexed="true" stored="true" />
-  <field name="timeCodeStart" type="string" indexed="true" stored="true"/>
+  <field name="timecodeStart" type="string" indexed="true" stored="true"/>
   
   
     
@@ -273,11 +294,17 @@
   <field name="numPackets" type="string" indexed="true" stored="true" />
   <field name="software" type="string" indexed="true" stored="true" />
   <field name="channels" type="string" indexed="true" stored="true" docValues="false" multiValued="true" />
-  
+  <field name="wordSize" type="string" indexed="true" stored="true" docValues="false" multiValued="true" />
   <field name="blockSizeMin" type="string" indexed="true" stored="true" />
   <field name="blockSizeMax" type="string" indexed="true" stored="true" />
+  <field name="blockAlign" type="string" indexed="true" stored="true" />
+  <field name="offset" type="string" indexed="true" stored="true" />
+  <field name="codecName" type="string" indexed="true" stored="true" />
+  <field name="codecNameVersion" type="string" indexed="true" stored="true" />
+  <field name="codecCreatorApplication" type="string" indexed="true" stored="true" />
+  <field name="codecCreatorApplicationVersion" type="string" indexed="true" stored="true" />
   
-   
+  
   <!-- Document --> 
   <field name="characterInfo" type="string" indexed="true" stored="true"  />
   <field name="markupBasis" type="string" indexed="true" multiValued="true" stored="true" />
