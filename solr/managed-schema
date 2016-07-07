@@ -134,16 +134,18 @@
   <field name="md5checksum" type="string" indexed="true" stored="true"/>
   <field name="mime_type" type="string" multiValued="true" indexed="true" stored="true"/>
   <field name="size" type="float" indexed="true" stored="true"/>
+  <field name="inhibitorType" type="float" indexed="true" stored="true"/>
   <field name="standard" type="string" indexed="true" stored="true"/>
   <field name="valid" type="boolean" indexed="true" stored="true"/>
   <field name="well-formed" type="boolean" indexed="true" stored="true"/>
+  <field name="copyrightNote" type="string" indexed="true" stored="true"/>
   <field name="format" type="string" multiValued="true" indexed="true" stored="true"/>
   <field name="lastmodified" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
   <field name="mimetype" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
   <field name="mimeType" type="string" multiValued="true" indexed="true" stored="true" docValues="false"/>
   <field name="location" type="string" indexed="true" stored="true"/>
- 
-
+  <field name="creatingApplicationName" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
+  <field name="creatingApplicationVersion" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
   <!-- Images --> 
   <field name="compressionScheme" type="string" indexed="true" stored="true" multiValued="true" />
   <field name="imageHeight" type="string" indexed="true" stored="true" />
@@ -163,9 +165,7 @@
   <field name="_version_" type="long" indexed="true" stored="false" />
   <field name="bitsPerSample" type="string" indexed="true" stored="true" />
   <field name="captureDevice" type="string" indexed="true" stored="true" />
-  <field name="cfaPattern" type="string" multiValued="true" indexed="true" stored="true" />
-  <field name="charset" type="string" indexed="true" stored="true" />
-  <field name="creatingApplicationName" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
+  <field name="cfaPattern" type="string" multiValued="true" indexed="true" stored="true" /> 
   <field name="digitalCameraManufacturer" type="string" indexed="true" stored="true" />
   <field name="digitalCameraModelName" type="string" indexed="true" stored="true" />
   <field name="exifVersion" type="string" multiValued="true" indexed="true" stored="true" />
@@ -195,7 +195,9 @@
   <field name="iccProfileVersion" type="string" indexed="true" stored="true" />
   <field name="formatProfile" type="string" indexed="true" stored="true" multiValued="true" />
   <field name="track" type="string" indexed="true" stored="true" multiValued="true" />
-
+  <field name="apertureSetting" type="string" indexed="true" stored="true" />
+  
+  
   <!-- GPS -->
   <field name="gpsDestBearing" type="string" indexed="true" stored="true" />
   <field name="gpsAltitudeRef" type="string" indexed="true" stored="true" />
@@ -241,15 +243,43 @@
   <field name="frameCount" type="string" indexed="true" stored="true"  />
   <field name="bitDepth" type="string" indexed="true" stored="true"  />
   <field name="duration" type="string" indexed="true" stored="true" />
-
+  <field name="audioCompressor" type="string" indexed="true" stored="true" />
+  <field name="videoCompressor" type="string" indexed="true" stored="true" />
+  <field name="frameRate" type="string" indexed="true" stored="true" />
+  <field name="audioBitsPerSample" type="string" indexed="true" stored="true" />
+  <field name="sampleRate" type="string" indexed="true" stored="true" />
+  <field name="audioSampleRate" type="string" indexed="true" stored="true" />
+  <field name="encoding" type="string" indexed="true" stored="true" />
+  <field name="audioDataEncoding" type="string" indexed="true" stored="true" />
+  <field name="videoStreamType" type="string" indexed="true" stored="true" />
+  <field name="gain" type="string" indexed="true" stored="true"/>
+  <field name="whiteBalance" type="string" indexed="true" strored="true" />
+  <field name="imageStabilization" type="string" indexed="true" stored="true"/>
+  <field name="focus" type="string" indexed="true" stored="true" />
+  
+  
+    
+    
   <!-- Audio -->
   <field name="soundField" type="string" indexed="true" stored="true" />
   <field name="samplingRate" type="string" indexed="true" stored="true"  />
   <field name="sampleSize" type="string" indexed="true" stored="true"  />
   <field name="channels" type="string" indexed="true" stored="true"  />
   <field name="sampleCount" type="string" indexed="true" stored="true"  />
-
-  <!-- Document -->
+  <field name="numSamples" type="string" indexed="true" stored="true" />
+  <field name="sampleRate" type="string" indexed="true" stored="true" />
+  <field name="avgBitRate" type="string" indexed="true" stored="true" />
+  <field name="maxBitRate" type="string" indexed="true" stored="true"/>
+  <field name="maxPacketSize" type="string" indexed="true" stored="true"/>
+  <field name="numPackets" type="string" indexed="true" stored="true" />
+  <field name="software" type="string" indexed="true" stored="true" />
+  <field name="channels" type="string" indexed="true" stored="true" docValues="false" multiValued="true" />
+  <field name="audioDataEncoding" type="string" index="true" stored="true" />
+  <field name="blockSizeMin" type="string" indexed="true" stored="true" />
+  <field name="blockSizeMax" type="string" indexed="true" stored="true" />
+  
+   
+  <!-- Document --> 
   <field name="characterInfo" type="string" indexed="true" stored="true"  />
   <field name="markupBasis" type="string" indexed="true" multiValued="true" stored="true" />
   <field name="markupBasisVersion" type="string" indexed="true" multiValued="true" stored="true" />
@@ -257,12 +287,27 @@
   <field name="title" type="string" indexed="true" stored="true" />
   <field name="author" type="string" indexed="true" stored="true" />
   <field name="pageCount" type="string" indexed="true" stored="true" />
+  <field name="lineCount" type="string" indexed="true" stored="true" />
   <field name="hasOutline" type="string" indexed="true" stored="true" />
+  <field name="wordCount" type="string" indexed="true" stored="true" />
+  <field name="characterCount" type="string" indexed="true" stored="true" />
   <field name="linebreak" type="string" indexed="true" stored="true" multiValued="true" docValues="false"/>
   <field name="hasAnnotations" type="string" indexed="true" stored="true" />
   <field name="font" type="string" indexed="true" stored="true" multiValued="true"/>
   <field name="isTagged" type="string" indexed="true" stored="true" />
   <field name="hasForms" type="string" indexed="true" stored="true" />
+  <field name="charset" type="string" indexed="true" stored="true" />
+  <field name="isRightsManaged" type="boolean" indexed="true" stored="true" />
+  <field name="isProtected" type="boolean" indexed="true" stored="true" />
+  <field name="hasHyperlinks" type="boolean" indexed="true" stored="true" />
+  <field name="hasEmbeddedResources" type="boolean" indexed="true" stored="true" />
+  <field name="tableCount" type="string" indexed="true" stored="true" />
+  <field name="graphicsCount" type="string" indexed="true" stored="true" />
+  <field name="description" type="text_general" indexed="true" stored="true" />
+  <field name="identifier" type="string" indexed="true" stored="true" />
+  <field name="source" type="string" indexed="true" stored="true" />
+  <field name="language" type="string" indexed="true" stored="true" />
+  <field name="isTagged" type="boolean" indexed="true" stored="true" />
   
   
   
