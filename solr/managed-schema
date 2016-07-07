@@ -247,15 +247,15 @@
   <field name="videoCompressor" type="string" indexed="true" stored="true" />
   <field name="frameRate" type="string" indexed="true" stored="true" />
   <field name="audioBitsPerSample" type="string" indexed="true" stored="true" />
-  <field name="sampleRate" type="string" indexed="true" stored="true" />
   <field name="audioSampleRate" type="string" indexed="true" stored="true" />
   <field name="encoding" type="string" indexed="true" stored="true" />
-  <field name="audioDataEncoding" type="string" indexed="true" stored="true" />
+  <field name="audioDataEncoding" type="string" indexed="true" stored="true" multiValued="true" docValues="false" />
   <field name="videoStreamType" type="string" indexed="true" stored="true" />
   <field name="gain" type="string" indexed="true" stored="true"/>
-  <field name="whiteBalance" type="string" indexed="true" strored="true" />
+  <field name="whiteBalance" type="string" indexed="true" stored="true" />
   <field name="imageStabilization" type="string" indexed="true" stored="true"/>
   <field name="focus" type="string" indexed="true" stored="true" />
+  <field name="timeCodeStart" type="string" indexed="true" stored="true"/>
   
   
     
@@ -264,7 +264,6 @@
   <field name="soundField" type="string" indexed="true" stored="true" />
   <field name="samplingRate" type="string" indexed="true" stored="true"  />
   <field name="sampleSize" type="string" indexed="true" stored="true"  />
-  <field name="channels" type="string" indexed="true" stored="true"  />
   <field name="sampleCount" type="string" indexed="true" stored="true"  />
   <field name="numSamples" type="string" indexed="true" stored="true" />
   <field name="sampleRate" type="string" indexed="true" stored="true" />
@@ -274,7 +273,7 @@
   <field name="numPackets" type="string" indexed="true" stored="true" />
   <field name="software" type="string" indexed="true" stored="true" />
   <field name="channels" type="string" indexed="true" stored="true" docValues="false" multiValued="true" />
-  <field name="audioDataEncoding" type="string" index="true" stored="true" />
+  
   <field name="blockSizeMin" type="string" indexed="true" stored="true" />
   <field name="blockSizeMax" type="string" indexed="true" stored="true" />
   
@@ -291,6 +290,7 @@
   <field name="hasOutline" type="string" indexed="true" stored="true" />
   <field name="wordCount" type="string" indexed="true" stored="true" />
   <field name="characterCount" type="string" indexed="true" stored="true" />
+  <field name="paragraphCount" type="string" indexed="true" stored="true" />
   <field name="linebreak" type="string" indexed="true" stored="true" multiValued="true" docValues="false"/>
   <field name="hasAnnotations" type="string" indexed="true" stored="true" />
   <field name="font" type="string" indexed="true" stored="true" multiValued="true"/>
@@ -307,7 +307,7 @@
   <field name="identifier" type="string" indexed="true" stored="true" />
   <field name="source" type="string" indexed="true" stored="true" />
   <field name="language" type="string" indexed="true" stored="true" />
-  <field name="isTagged" type="boolean" indexed="true" stored="true" />
+  
   
   
   

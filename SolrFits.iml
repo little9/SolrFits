@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="fits" level="project" />
-    <orderEntry type="library" name="org.apache.solr:solr-solrj:6.1.0" level="project" />
+    <orderEntry type="library" exported="" name="fits" level="project" />
+    <orderEntry type="library" exported="" name="org.apache.solr:solr-solrj:6.1.0" level="project" />
   </component>
 </module>
