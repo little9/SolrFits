@@ -14,6 +14,7 @@ is very much a work in progress.
 java -jar SolrFits.jar "/path/to/fits-1.0.0" "http://localhost:8983/solr/fits" "/path/to/be/analyzed"
 ```
 
-
+The path provided will be indexed recusrively. The checksum for each file is checked and if a file with same checksum has already 
+been indexed it will be skipped. 
 
 
