@@ -24,9 +24,20 @@ class DupeChecker {
     private boolean status;
     private MessageDigest messageDigest;
 
-    DupeChecker(Path file, SolrClient solrClient)  {
+    public Path getFile() {
+        return file;
+    }
+
+    public void setFile(Path file) {
         this.file = file;
+    }
+
+    DupeChecker(SolrClient solrClient)  {
         this.solrClient = solrClient;
+
+        if (this.messageDigest != null) {
+            this.messageDigest.reset();
+        }
 
         try {
             this.messageDigest = MessageDigest.getInstance("MD5");
@@ -39,7 +50,7 @@ class DupeChecker {
         // Check Solr to see if the file has already been index by getting the md5 checksum
         // of the file and doing a Solr query using that checksum. Don't run FITS if the
         // file already exists.
-        try (InputStream inputStream = Files.newInputStream(this.file)) {
+        try (InputStream inputStream = Files.newInputStream(this.getFile())) {
             byte[] buffer = new byte[8192];
             DigestInputStream digestInputStream = new DigestInputStream(inputStream, messageDigest);
 

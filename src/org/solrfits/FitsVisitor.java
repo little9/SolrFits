@@ -21,11 +21,13 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 class FitsVisitor extends SimpleFileVisitor<Path> {
     private final Fits fits;
     private String fp;
-    private final SolrClient sc;
+    private final SolrClient solrClient;
+    private final DupeChecker dupeChecker;
 
-    FitsVisitor(Fits myFits, SolrClient mySc) throws NoSuchAlgorithmException {
-        fits = myFits;
-        sc = mySc;
+    FitsVisitor(Fits fits, SolrClient solrClient, DupeChecker dupeChecker) throws NoSuchAlgorithmException {
+        this.fits = fits;
+        this.solrClient = solrClient;
+        this.dupeChecker = dupeChecker;
     }
 
     @Override
@@ -33,11 +35,11 @@ class FitsVisitor extends SimpleFileVisitor<Path> {
                                      BasicFileAttributes attr) throws IOException {
 
         if (attr.isRegularFile() && !file.getFileName().toString().contains(".mtf") && !file.getFileName().toString().contains("checksum_manifest")) {
-            DupeChecker dupeChecker = new DupeChecker(file, sc);
             try {
+                dupeChecker.setFile(file);
                 if (!dupeChecker.inSolr()) {
 
-                    new FitsRunner(sc,file.toFile(),fits).run();
+                    new FitsRunner(solrClient,file.toFile(),fits).run();
 
                 } else {
                     System.out.println("Skipping " + file.getFileName());
