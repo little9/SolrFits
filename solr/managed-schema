@@ -311,7 +311,7 @@
   <field name="markupBasisVersion" type="string" indexed="true" multiValued="true" stored="true" />
   <field name="markupLanguage" type="string" indexed="true" stored="true" />
   <field name="title" type="string" indexed="true" stored="true" />
-  <field name="author" type="string" indexed="true" stored="true" />
+  <field name="author" type="string" indexed="true" stored="true" multiValued="true" docValues="false" />
   <field name="pageCount" type="string" indexed="true" stored="true" />
   <field name="lineCount" type="string" indexed="true" stored="true" />
   <field name="hasOutline" type="string" indexed="true" stored="true" />
