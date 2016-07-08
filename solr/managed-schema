@@ -146,6 +146,7 @@
   <field name="location" type="string" indexed="true" stored="true"/>
   <field name="creatingApplicationName" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
   <field name="creatingApplicationVersion" type="string" multiValued="true" indexed="true" stored="true" docValues="false" />
+  <field name="fslastmodified" type="date" indexed="true" stored="true" docValues="false" />
   <!-- Images --> 
   
   <field name="extraSamples" type="string" indexed="true" stored="true" multiValued="true" />
@@ -196,7 +197,6 @@
   <field name="fNumber" type="string" indexed="true" stored="true" />
   <field name="flash" type="string" indexed="true" stored="true" />
   <field name="focalLength" type="string" multiValued="true" indexed="true" stored="true" />
-  <field name="fslastmodified" type="string" indexed="true" stored="true" docValues="false" />
   <field name="gpsVersionID" type="string" indexed="true" stored="true" />
   <field name="gpsVersionId" type="string" indexed="true" stored="true" />
   <field name="isoSpeedRating" type="int" indexed="true" stored="true"/>
@@ -205,7 +205,6 @@
   <field name="meteringMode" type="string" indexed="true" stored="true"/>
   <field name="orientation" type="string" indexed="true" stored="true"/>
   <field name="samplingFrequencyUnit" type="string" indexed="true" stored="true"/>
-  
   <field name="sensingMethod" type="string" indexed="true" stored="true"/>
   <field name="shutterSpeedValue" type="string" indexed="true" stored="true"/>
   <field name="xSamplingFrequency" type="string" indexed="true" stored="true"/>
@@ -247,7 +246,7 @@
   <!-- Video -->
   <field name="width" type="int" indexed="true" stored="true" />
   <field name="height" type="int" indexed="true" stored="true" />
-  <field name="bitRate" type="string" indexed="true" stored="true"  />
+  <field name="bitRate" type="string" indexed="true" stored="true" multiValued="true" docValues="false"/>
   <field name="bitRateMax" type="string" indexed="true" stored="true"  />
   <field name="bitRateMode" type="string" indexed="true" stored="true" />
   <field name="scanningFormat" type="string" indexed="true" stored="true"  />
@@ -287,7 +286,7 @@
   <field name="sampleSize" type="string" indexed="true" stored="true"  />
   <field name="sampleCount" type="string" indexed="true" stored="true"  />
   <field name="numSamples" type="string" indexed="true" stored="true" />
-  <field name="sampleRate" type="string" indexed="true" stored="true" />
+  <field name="sampleRate" type="string" indexed="true" stored="true" multiValued="true" docValues="false" />
   <field name="avgBitRate" type="string" indexed="true" stored="true" />
   <field name="maxBitRate" type="string" indexed="true" stored="true"/>
   <field name="maxPacketSize" type="string" indexed="true" stored="true"/>
@@ -303,7 +302,7 @@
   <field name="codecNameVersion" type="string" indexed="true" stored="true" />
   <field name="codecCreatorApplication" type="string" indexed="true" stored="true" />
   <field name="codecCreatorApplicationVersion" type="string" indexed="true" stored="true" />
-  
+  <field name="milliseconds" type="long" indexed="true" stored="true" />
   
   <!-- Document --> 
   <field name="characterInfo" type="string" indexed="true" stored="true"  />
@@ -311,7 +310,7 @@
   <field name="markupBasisVersion" type="string" indexed="true" multiValued="true" stored="true" />
   <field name="markupLanguage" type="string" indexed="true" stored="true" />
   <field name="title" type="string" indexed="true" stored="true" />
-  <field name="author" type="string" indexed="true" stored="true" multiValued="true" docValues="false" />
+  <field name="author" type="string" indexed="true" stored="true" />
   <field name="pageCount" type="string" indexed="true" stored="true" />
   <field name="lineCount" type="string" indexed="true" stored="true" />
   <field name="hasOutline" type="string" indexed="true" stored="true" />

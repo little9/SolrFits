@@ -8,6 +8,7 @@ import edu.harvard.hul.ois.fits.identity.FitsIdentity;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
+import org.apache.solr.client.solrj.io.stream.ParallelStream;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.common.SolrInputField;
@@ -49,7 +50,14 @@ class FitsExaminer {
 
     private void indexFitsFileInfo(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         for (FitsMetadataElement metadataElement : fitsOutput.getFileInfoElements()) {
-            solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
+            if (Objects.equals(metadataElement.getName(), "fslastmodified")) {
+                DateHandler dh = new DateHandler();
+                metadataElement.setValue(dh.getXMLSchemaDate(Long.decode(metadataElement.getValue())));
+                solrDoc.addField(metadataElement.getName(), metadataElement.getValue()+"Z");
+
+            } else {
+                solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
+            }
         }
     }
 
@@ -61,8 +69,8 @@ class FitsExaminer {
 
     private void indexTechMetadata(FitsOutput fitsOutput, SolrInputDocument solrDoc) {
         try {
-            for (FitsMetadataElement el : fitsOutput.getTechMetadataElements()) {
-                solrDoc.addField(el.getName(), el.getValue());
+            for (FitsMetadataElement metadataElement : fitsOutput.getTechMetadataElements()) {
+                solrDoc.addField(metadataElement.getName(), metadataElement.getValue());
             }
         } catch (Exception ignored) {
         }
