@@ -3,7 +3,7 @@
 This is a Java application that uses FITS to generate metadata which is then indexed in Solr – it 
 is very much a work in progress. 
 
-Along with the Java application, there is a <a href="https://github.com/little9/SolrFits/blob/master/solr/managed-schema">Solr schema</a> that includes fields for FITS output. 
+Along with the Java application, there is a <a href="https://github.com/little9/SolrFits/blob/master/solr/schema.xml">Solr schema</a> that includes fields for FITS output. 
 
 # Running SolrFits
 
