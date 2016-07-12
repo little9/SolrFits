@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Solr managed schema - automatically generated - DO NOT EDIT -->
 <schema name="example" version="1.6">
   <uniqueKey>id</uniqueKey>
   <fieldType name="_bbox_coord" class="solr.TrieDoubleField" stored="false" useDocValuesAsStored="false" docValues="true" precisionStep="8"/>
